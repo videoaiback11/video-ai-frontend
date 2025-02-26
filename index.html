@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video AI Generator</title>
+</head>
+<body>
+    <h1>Video AI Generator</h1>
+    <input type="text" id="prompt" placeholder="Masukkan topik video">
+    <button onclick="generateScript()">Buat Skrip</button>
+    <p id="result"></p>
+
+    <script>
+        async function generateScript() {
+            const prompt = document.getElementById("prompt").value;
+            const response = await fetch("http://localhost:5000/generate-script", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt })
+            });
+            const data = await response.json();
+            document.getElementById("result").innerText = data.script;
+        }
+    </script>
+</body>
+</html>
